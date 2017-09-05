@@ -29,13 +29,13 @@ Task("Test")
 
     // Match the regular expression pattern against a text string.
     System.Text.RegularExpressions.Match m = r.Match(result.Message);
-    
+
     var solutionFolder = ".";
 
     Information(m.Value);
  
     GitTag(solutionFolder, m.Value);
-    GitPushRef(solutionFolder, "dubravko.ban@gmail.com", "###", "origin", m.Value); 
+    GitPushRef(solutionFolder, "dubravko.ban@gmail.com", "#", "origin", m.Value); 
 });
 
 
