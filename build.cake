@@ -21,11 +21,22 @@ Task("Test")
     var result = GitLogTip(".");
     Information(result.Message);
 
-    var versionTag = "1.2.3.999";
+
+    string pat = @"(\d+\.\d+\.\d+)";
+
+    // Instantiate the regular expression object.
+    System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(pat, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+    // Match the regular expression pattern against a text string.
+    System.Text.RegularExpressions.Match m = r.Match(result.Message);
+
+    var versionTag = m.Value + ".999";
     var solutionFolder = ".";
 
+    Information(versionTag);
+
     GitTag(solutionFolder, versionTag);
-    GitPushRef(solutionFolder, "span\\dban", "Kimchi1357", "origin", versionTag); 
+    GitPushRef(solutionFolder, "dubravko.ban@gmail.com", "L1bus0ft", "origin", versionTag); 
 });
 
 
