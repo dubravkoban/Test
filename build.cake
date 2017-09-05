@@ -1,0 +1,46 @@
+#addin "Cake.Git"
+
+//////////////////////////////////////////////////////////////////////
+// ARGUMENTS
+//////////////////////////////////////////////////////////////////////
+
+var target = Argument("Test", "Test");
+
+//////////////////////////////////////////////////////////////////////
+// PREPARATION
+//////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////
+// TASKS
+//////////////////////////////////////////////////////////////////////
+
+Task("Test")
+    .Does(() =>
+{
+    var result = GitLogTip(".");
+    Information(result.Message);
+
+    string text = "Task #15131: bljeeee";
+    string pat = @"blje";
+
+    // Instantiate the regular expression object.
+    System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(pat, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+    // Match the regular expression pattern against a text string.
+    System.Text.RegularExpressions.Match m = r.Match(text);
+	
+	var file = "./GlobalAssemblyInfo.cs";
+	var semVersion = string.Concat(m.Value + "." + "999");
+	CreateAssemblyInfo(file, new AssemblyInfoSettings {
+		Version = semVersion,
+		FileVersion = semVersion,
+	});
+});
+
+
+//////////////////////////////////////////////////////////////////////
+// EXECUTION
+//////////////////////////////////////////////////////////////////////
+
+RunTarget(target);
