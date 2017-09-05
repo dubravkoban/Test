@@ -35,7 +35,7 @@ Task("Test")
     Information(m.Value);
  
     GitTag(solutionFolder, m.Value);
-    GitPushRef(solutionFolder, "dubravko.ban@gmail.com", "#", "origin", m.Value); 
+    GitPushRef(solutionFolder, "dubravko.ban@gmail.com", "L1bus0ft", "origin", m.Value); 
 });
 
 
