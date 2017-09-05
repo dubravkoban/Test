@@ -22,21 +22,20 @@ Task("Test")
     Information(result.Message);
 
 
-    string pat = @"(\d+\.\d+\.\d+)";
+    string pat = @"(test|hotfix|release)\/(\d+\.\d+\.\d+)";
 
     // Instantiate the regular expression object.
     System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(pat, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 
     // Match the regular expression pattern against a text string.
     System.Text.RegularExpressions.Match m = r.Match(result.Message);
-
-    var versionTag = m.Value + ".999";
+    
     var solutionFolder = ".";
 
-    Information(versionTag);
-
-    GitTag(solutionFolder, versionTag);
-    GitPushRef(solutionFolder, "dubravko.ban@gmail.com", "L1bus0ft", "origin", versionTag); 
+    Information(m.Value);
+ 
+    GitTag(solutionFolder, m.Value);
+    GitPushRef(solutionFolder, "dubravko.ban@gmail.com", "###", "origin", m.Value); 
 });
 
 
